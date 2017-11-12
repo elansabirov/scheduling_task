@@ -1,0 +1,15 @@
+--- # cron
+- hosts: all
+- connection: ssh
+- become: ssh
+- become_method: sudo
+- gather_facts: no
+  tasks:
+    - name: clean up system /tmp folder
+      cron:
+        name: clean remote system
+        weekday: 0
+        hour: 23
+        minute: 59
+        job: "rm -rf /tmp/*"
+        state: present
